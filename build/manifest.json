@@ -2,6 +2,7 @@
 	"manifest_version": 2,
 	"name": "Better Marmoset",
 	"version": "1.0",
+	"author": "Felix Guo",
 	"description": "A better marmoset.",
 	"icons": {
 	  "128": "icon128.png"
