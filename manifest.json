@@ -1,0 +1,14 @@
+{
+	"manifest_version": 2,
+	"name": "Better Marmoset",
+	"version": "1.0",
+	"description": "A better marmoset.",
+	"icons": {
+	  "128": "icon128.png"
+	},
+	"content_scripts" : [{
+        "matches" : [ "https://marmoset.student.cs.uwaterloo.ca/view/course.jsp*"],
+        "js" : ["inject.js"]
+	}],
+	"web_accessible_resources": ["better-marmoset.js"]
+  }
