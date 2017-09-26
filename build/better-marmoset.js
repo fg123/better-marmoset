@@ -5,6 +5,8 @@ $(document).ready(function () {
 				<th>submitted</th>
 				<th>public tests <br>score</th>
 				<th>detailed<br>test results</th>
+				<th>passed</th>
+				<th>failed</th>
 				<th>Download</th>`);
 		}
 		else { 
@@ -15,13 +17,26 @@ $(document).ready(function () {
 				success: function (data) {
 					var data = $(data).find("tr:nth-child(2)");
 					if (data.length) {
-						tr.append(data.html());
+						var submissionUrl = $(data).find("td:nth-child(4) a").attr("href");
+						jQuery.get(submissionUrl, function (submissionData) {
+							var passed = 0, failed = 0;
+							$(submissionData).find("tr td:nth-last-child(2)").each(function () { 
+
+								if ($(this).text().indexOf("passed") !== -1) {
+									passed++;
+								}
+								else { 
+									failed++;
+								}
+							});
+							$(data).find("td:nth-child(4)").after("<td>" + passed + "</td><td>" + failed + "</td>");
+							tr.append(data.html());
+						});
 					}
 					else { 
 						tr.append(`<td colspan="5"><b>No submissions yet!</b></td>`);
 					}
-				},
-				async: false
+				}
 			});
 		}
 	});
